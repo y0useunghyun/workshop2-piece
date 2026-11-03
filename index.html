@@ -3,160 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>워크숍 2 피스</title>
+<title>PIECE WORKSHOP</title>
+<script>
+      (function(d) {
+        var config = {
+          kitId: 'vie5vnf',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
 <link rel="stylesheet" href="style.css">
+<style>
+  /* 앞면: 원색 조각 바닥 + 그 위에 떨어진 151번째 조각, 영수증 */
+  .cover { flex: 1; position: relative; overflow: hidden; }
+  .cover-floor { position: absolute; inset: 0; touch-action: none; cursor: grab; }
+  .cover-floor.dragging { cursor: grabbing; }
+  .receipt {
+    /* 화면이 낮으면 넘치지 않게 높이 기준으로도 줄임. 안쪽 크기는 전부 em이라 함께 커짐 */
+    position: absolute; width: min(88vw, 440px, 56dvh); transform: translate(-50%, -50%) rotate(var(--r, -2deg));
+    filter: drop-shadow(0 8px 12px rgba(40, 30, 20, .3));
+  }
+  .paper { padding: 1.45em 1.35em 1.65em; background: #fff; color: var(--ink); font-size: calc(min(88vw, 440px, 56dvh) * .053); line-height: 1.45; }
+  .cover-title { margin: 0; font-size: 4em; font-weight: 700; line-height: .9; letter-spacing: .04em; text-align: center; height: .68em; overflow: hidden; }
+  .brand { margin: .5em 0 0; text-align: center; letter-spacing: .32em; font-size: 1.11em; }
+  .names { margin: .35em 0 0; text-align: center; }
+  .dates { margin: .35em 0 .7em; text-align: center; font-size: .89em; color: var(--muted); }
+  .rule { border: 0; border-top: 2px dotted var(--ink); margin: .55em 0; }
+  .row { display: flex; justify-content: space-between; color: var(--part); font-weight: 700; font-size: 1.11em; }
+  .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.22em; }
+  .meta { margin: 0; font-size: 1em; }
+  .meta a { color: inherit; text-decoration: none; border-bottom: 2px dotted currentColor; }
+  .enter { display: block; margin-top: .8em; color: inherit; text-decoration: none; text-align: center; font-size: .89em; letter-spacing: .24em; }
+  .enter svg { display: block; width: 100%; height: 3.5em; margin-bottom: .35em; }
+  .enter:hover svg { opacity: .6; }
+  .meta a:focus-visible, .enter:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .cover-sound { position: fixed; z-index: 3; right: 22px; bottom: 16px; padding: 2px 8px; font-size: 19px; color: var(--ink); background: #fff; }
+</style>
 </head>
 <body>
-<header>
-  <a class="logo" href="index.html">PIECE</a>
-  <div class="tags" role="toolbar" aria-label="태그"></div>
-  <nav>
-    <a href="game.html">GAME</a><a href="#" data-about>ABOUT</a>
-  </nav>
-</header>
-<main class="floor" aria-label="상품 바닥"></main>
-<footer><button class="sound" type="button" aria-pressed="false">SOUND OFF</button></footer>
+<main class="cover">
+  <div class="cover-floor">
+    <article class="receipt" aria-label="PIECE WORKSHOP 영수증">
+      <div class="paper">
+        <h1 class="cover-title" aria-label="PIECE"><span aria-hidden="true" data-part="모자">P</span><span aria-hidden="true" data-part="상의">I</span><span aria-hidden="true" data-part="하의">E</span><span aria-hidden="true" data-part="신발">C</span><span aria-hidden="true" data-part="아이템">E</span></h1>
+        <p class="brand">WORKSHOP</p>
+        <p class="names">승현 서빈 물결 하린 하연</p>
+        <p class="dates">2026.10.30 — 2026.11.28</p>
+        <hr class="rule">
+        <div class="row" data-part="모자"><span>HAT</span><span>30</span></div><div class="row" data-part="상의"><span>TOP</span><span>30</span></div><div class="row" data-part="하의"><span>BOTTOM</span><span>30</span></div><div class="row" data-part="신발"><span>SHOES</span><span>30</span></div><div class="row" data-part="아이템"><span>ITEM</span><span>30</span></div>
+        <hr class="rule">
+        <div class="total"><span>TOTAL</span><span>150 PIECES</span></div>
+        <hr class="rule">
+        <p class="meta">배정 <a href="https://y0useunghyun.github.io/daily-outfit/" target="_blank" rel="noopener">아웃핏 사이트</a></p>
+        <a class="enter" href="home.html" aria-label="PIECE WORKSHOP 안으로 들어가기"><svg viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"></svg>ENTER</a>
+      </div>
+    </article>
+  </div>
+</main>
+<button class="sound cover-sound" type="button" aria-pressed="false">SOUND OFF</button>
 
 <script src="data.js"></script>
-<script src="about.js" defer></script>
+<script src="floor.js"></script>
 <script src="sound.js"></script>
-<script src="detail.js" defer></script>
-<script>
-// 부위별 기본 크기 (칸 크기 대비). 신발이 상의만 해지지 않게.
-const PART_SCALE = { 모자: 1.1, 상의: 1.7, 하의: 1.6, 신발: 1.15, 아이템: 1.3 };
-const MAX_TILT = 14;     // 회전 ±도
-const PARTS = ['모자', '상의', '하의', '신발', '아이템'];
-const TOTAL = 150;       // 발표 기준 총 개수 (5명 × 30일)
-
-const floor = document.querySelector('.floor');
-const params = new URLSearchParams(location.search);
-// ponytail: 150개가 모이기 전까진 있는 옷을 반복해서 채움. ?n= 으로 개수 확인 가능
-const target = Number(params.get('n')) || TOTAL;
-const pool = Array.from({ length: target }, (_, i) => PIECES[i % PIECES.length]);
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function layout() {
-  // 헤더·푸터 사이 영역에 전부 들어오도록 칸 크기 계산 → 빈 곳 없는 바닥
-  const W = floor.clientWidth, H = floor.clientHeight;
-  const cols = Math.max(3, Math.round(Math.sqrt(pool.length * W / H)));
-  const rows = Math.ceil(pool.length / cols);
-  const cell = Math.min(W / cols, H / rows);
-  // 가장자리 옷이 잘리지 않게 바깥쪽 반 칸씩 여백
-  const pad = cell * 0.5;
-  const cellW = (W - pad * 2) / cols, cellH = (H - pad * 2) / rows;
-  floor.replaceChildren(...shuffle(pool).map((p, i) => {
-    const c = i % cols, r = Math.floor(i / cols);
-    const size = cell * (PART_SCALE[p.part] ?? 1) * (0.85 + Math.random() * 0.3);
-    const a = document.createElement('a');
-    a.className = 'piece';
-    a.href = '#';
-    a.dataset.id = p.id;
-    a.dataset.part = p.part;
-    if (p.person) a.dataset.person = p.person;
-    a.style.cssText = `
-      left:${pad + (c + 0.5 + (Math.random() - 0.5) * 0.6) * cellW}px;
-      top:${pad + (r + 0.5 + (Math.random() - 0.5) * 0.6) * cellH}px;
-      width:${size}px; height:${size}px;
-      --r:${(p.rot ?? 0) + (Math.random() * 2 - 1) * MAX_TILT}deg`;
-    a.innerHTML = `<img src="${p.src}" alt="${p.part}" decoding="async">`;
-    return a;
-  }));
-  applyFilter();
-}
-
-// 태그: 옷은 제자리, 안 맞는 옷만 꺼짐
-const PART_EN = { 모자: 'HAT', 상의: 'TOP', 하의: 'BOTTOM', 신발: 'SHOES', 아이템: 'ITEM' };
-const tagBar = document.querySelector('.tags');
-const people = [...new Set(PIECES.filter(p => p.person).map(p => p.person))];
-let filter = { part: null, person: null };
-
-function applyFilter() {
-  floor.querySelectorAll('.piece').forEach(el => {
-    const on = (!filter.part || el.dataset.part === filter.part)
-      && (!filter.person || el.dataset.person === filter.person);
-    el.classList.toggle('off', !on);
-    el.tabIndex = on ? 0 : -1;
-  });
-}
-
-function tagButton(label, pressed, next) {
-  const b = document.createElement('button');
-  b.type = 'button';
-  b.textContent = label;
-  b.setAttribute('aria-pressed', pressed);
-  b.addEventListener('click', () => { filter = next; renderTags(); applyFilter(); });
-  return b;
-}
-
-function renderTags() {
-  const parts = document.createElement('div');
-  parts.className = 'group';
-  parts.append(
-    tagButton('ALL', !filter.part && !filter.person, { part: null, person: null }),
-    ...PARTS.map(part => tagButton(PART_EN[part], filter.part === part,
-      { ...filter, part: filter.part === part ? null : part })));
-  const persons = document.createElement('div');
-  persons.className = 'group';
-  persons.append(...people.map(person => tagButton(person, filter.person === person,
-    { ...filter, person: filter.person === person ? null : person })));
-  tagBar.replaceChildren(parts, ...(people.length ? [persons] : []));
-}
-
-// 소리 규칙: 누른 옷이 그 부위의 악기가 됨 (부위마다 마지막에 누른 옷이 남음). 화면 좌우 위치로 패닝
-const PAN_RANGE = 40; // Sound.sync의 dx 단위 (±40 = 완전 좌/우)
-let look = Object.fromEntries(PARTS.map(part => [part, null]));
-let pans = Object.fromEntries(PARTS.map(part => [part, 0]));
-
-function syncSound() {
-  Sound.sync(look, Object.fromEntries(PARTS.map(part => [part, [pans[part], 0, 1]])));
-}
-
-function wear(el) {
-  const part = el.dataset.part;
-  look = { ...look, [part]: el.dataset.id };
-  pans = { ...pans, [part]: (parseFloat(el.style.left) / floor.clientWidth - 0.5) * 2 * PAN_RANGE };
-  syncSound();
-}
-
-// 상세 창은 detail.js가 띄우고, 여기선 소리만 바꿈
-floor.addEventListener('click', e => {
-  const el = e.target.closest('.piece');
-  if (el) wear(el);
-});
-
-// 처음 켤 때 빈 소리가 되지 않도록, 화면 가운데에서 가장 가까운 옷을 부위별로 하나씩
-function wearCenter() {
-  const cx = floor.clientWidth / 2, cy = floor.clientHeight / 2;
-  const nearest = {};
-  floor.querySelectorAll('.piece:not(.off)').forEach(el => {
-    const d = Math.hypot(parseFloat(el.style.left) - cx, parseFloat(el.style.top) - cy);
-    const part = el.dataset.part;
-    if (!nearest[part] || d < nearest[part].d) nearest[part] = { d, el };
-  });
-  Object.values(nearest).forEach(({ el }) => wear(el));
-}
-
-const soundBtn = document.querySelector('.sound');
-soundBtn.addEventListener('click', () => {
-  const on = Sound.toggle();
-  soundBtn.setAttribute('aria-pressed', on);
-  soundBtn.textContent = on ? 'SOUND ON' : 'SOUND OFF';
-  if (on && !Object.values(look).some(Boolean)) wearCenter();
-  else syncSound();
-});
-
-let lastW = innerWidth;
-addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; layout(); } });
-renderTags();
-layout();
-</script>
+<script src="cover.js"></script>
 </body>
 </html>

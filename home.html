@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>워크숍 2 피스</title>
+<script>
+      (function(d) {
+        var config = {
+          kitId: 'vie5vnf',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="backdrop" style="opacity:.15" aria-hidden="true"></div>
+<header>
+  <a class="logo" href="index.html" aria-label="PIECE"><span aria-hidden="true" data-part="모자">P</span><span aria-hidden="true" data-part="상의">I</span><span aria-hidden="true" data-part="하의">E</span><span aria-hidden="true" data-part="신발">C</span><span aria-hidden="true" data-part="아이템">E</span></a>
+  <div class="tags" role="toolbar" aria-label="태그"></div>
+  <nav>
+    <a href="game.html">GAME</a><a href="#" data-about>ABOUT</a>
+  </nav>
+</header>
+<main class="floor" aria-label="상품 바닥"></main>
+<footer><button class="sound" type="button" aria-pressed="false">SOUND OFF</button></footer>
+
+<script src="data.js"></script>
+<script src="about.js" defer></script>
+<script src="sound.js"></script>
+<script src="floor.js"></script>
+<script src="stage.js"></script>
+<script src="detail.js" defer></script>
+<script>
+const PARTS = ['모자', '상의', '하의', '신발', '아이템'];
+const PIECE_SCALE = 1.25; // 옷 크기 배율
+const floor = document.querySelector('.floor');
+Floor.backdrop(document.querySelector('.backdrop'));
+
+function layout() {
+  Floor.scatter(floor, p => {
+    const a = document.createElement('a');
+    a.className = 'piece';
+    a.href = '#';
+    a.dataset.id = p.id;
+    if (p.person) a.dataset.person = p.person;
+    a.innerHTML = `<img src="${p.src}" alt="${p.part}" decoding="async">`;
+    return a;
+  }, { scale: PIECE_SCALE });
+  applyFilter();
+}
+
+// 태그: 옷은 제자리, 안 맞는 옷만 꺼짐
+const PART_EN = { 모자: 'HAT', 상의: 'TOP', 하의: 'BOTTOM', 신발: 'SHOES', 아이템: 'ITEM' };
+const tagBar = document.querySelector('.tags');
+const people = [...new Set(PIECES.filter(p => p.person).map(p => p.person))];
+let filter = { part: null, person: null };
+
+function applyFilter() {
+  floor.querySelectorAll('.piece').forEach(el => {
+    const on = (!filter.part || el.dataset.part === filter.part)
+      && (!filter.person || el.dataset.person === filter.person);
+    el.classList.toggle('off', !on);
+    el.tabIndex = on ? 0 : -1;
+  });
+}
+
+function tagButton(label, pressed, next, part) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = label;
+  if (part) b.dataset.part = part;
+  b.setAttribute('aria-pressed', pressed);
+  b.addEventListener('click', () => { filter = next; renderTags(); applyFilter(); });
+  return b;
+}
+
+function renderTags() {
+  const parts = document.createElement('div');
+  parts.className = 'group';
+  parts.append(
+    tagButton('ALL', !filter.part && !filter.person, { part: null, person: null }),
+    ...PARTS.map(part => tagButton(PART_EN[part], filter.part === part,
+      { ...filter, part: filter.part === part ? null : part }, part)));
+  const persons = document.createElement('div');
+  persons.className = 'group';
+  persons.append(...people.map(person => tagButton(person, filter.person === person,
+    { ...filter, person: filter.person === person ? null : person })));
+  tagBar.replaceChildren(parts, ...(people.length ? [persons] : []));
+}
+
+// 소리 규칙: 누른 옷이 그 부위의 악기가 됨 (부위마다 마지막에 누른 옷이 남음). 화면 좌우 위치로 패닝
+const PAN_RANGE = 40; // Sound.sync의 dx 단위 (±40 = 완전 좌/우)
+let look = Object.fromEntries(PARTS.map(part => [part, null]));
+let pans = Object.fromEntries(PARTS.map(part => [part, 0]));
+
+function syncSound() {
+  Sound.sync(look, Object.fromEntries(PARTS.map(part => [part, [pans[part], 0, 1]])));
+}
+
+function wear(el) {
+  const part = el.dataset.part;
+  look = { ...look, [part]: el.dataset.id };
+  pans = { ...pans, [part]: (parseFloat(el.style.left) / floor.clientWidth - 0.5) * 2 * PAN_RANGE };
+  syncSound();
+}
+
+// 상세 창은 detail.js가 띄우고, 여기선 소리만 바꿈
+floor.addEventListener('click', e => {
+  const el = e.target.closest('.piece');
+  if (el) wear(el);
+});
+
+// 처음 켤 때 빈 소리가 되지 않도록, 화면 가운데에서 가장 가까운 옷을 부위별로 하나씩
+function wearCenter() {
+  const cx = floor.clientWidth / 2, cy = floor.clientHeight / 2;
+  const nearest = {};
+  floor.querySelectorAll('.piece:not(.off)').forEach(el => {
+    const d = Math.hypot(parseFloat(el.style.left) - cx, parseFloat(el.style.top) - cy);
+    const part = el.dataset.part;
+    if (!nearest[part] || d < nearest[part].d) nearest[part] = { d, el };
+  });
+  Object.values(nearest).forEach(({ el }) => wear(el));
+}
+
+const soundBtn = document.querySelector('.sound');
+soundBtn.addEventListener('click', () => {
+  const on = Sound.toggle();
+  soundBtn.setAttribute('aria-pressed', on);
+  soundBtn.textContent = on ? 'SOUND ON' : 'SOUND OFF';
+  if (on && !Object.values(look).some(Boolean)) wearCenter();
+  else syncSound();
+});
+
+let lastW = innerWidth;
+addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; layout(); } });
+renderTags();
+layout();
+</script>
+</body>
+</html>

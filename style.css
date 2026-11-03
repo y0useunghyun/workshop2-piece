@@ -2,7 +2,8 @@
 * { box-sizing: border-box; margin: 0; }
 body {
   background: var(--floor); color: var(--ink);
-  font: 13px/1.4 "Helvetica Neue", Pretendard, system-ui, sans-serif;
+  /* 전부 안상수체 (Adobe Fonts). 같은 크기에서 작아 보여서 크게 씀 */
+  font: 21px/1.4 "agahnsangsoo2012", Pretendard, system-ui, sans-serif;
   letter-spacing: .02em;
   height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden;
 }
@@ -10,7 +11,7 @@ header {
   display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 0;
   padding: 18px 22px;
 }
-.logo { font-weight: 700; font-size: 15px; letter-spacing: .12em; }
+.logo { font-weight: 700; font-size: 30px; letter-spacing: .12em; }
 nav { display: flex; gap: 20px; }
 nav a { color: inherit; text-decoration: none; background: none; border: 0; font: inherit; cursor: pointer; padding: 0; }
 .floor { position: relative; flex: 1; overflow: hidden; }
@@ -26,7 +27,7 @@ nav a { color: inherit; text-decoration: none; background: none; border: 0; font
   transform: translate(-50%, -50%) rotate(var(--r)) scale(1.05);
   filter: drop-shadow(0 12px 14px rgba(40, 30, 20, .28));
 }
-footer { display: flex; justify-content: flex-end; align-items: baseline; padding: 12px 22px 16px; color: var(--muted); font-size: 11px; }
+footer { display: flex; justify-content: flex-end; align-items: baseline; padding: 12px 22px 16px; color: var(--muted); font-size: 19px; }
 .logo { color: inherit; text-decoration: none; }
 nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 3px; }
 
@@ -39,42 +40,27 @@ dialog.detail {
 dialog.detail::backdrop { background: rgba(255, 255, 255, .7); }
 .detail .close {
   position: sticky; top: 0; float: right; z-index: 1;
-  background: #fff; border: 0; padding: 16px 20px; font: inherit; font-size: 11px; letter-spacing: .12em; cursor: pointer;
+  background: #fff; border: 0; padding: 16px 20px; font: inherit; font-size: 19px; letter-spacing: .12em; cursor: pointer;
 }
 .detail .body {
   display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(240px, 1fr);
-  gap: 36px; padding: 28px; align-items: center; clear: both;
+  gap: 36px; padding: 28px; align-items: start; clear: both;
 }
-.detail .photo { display: grid; place-items: center; }
+.detail .photo { display: grid; place-items: center; align-self: stretch; min-height: 60vh; }
 .detail .photo img {
   max-width: 100%; max-height: 60vh; object-fit: contain;
   filter: drop-shadow(0 6px 10px rgba(40, 30, 20, .18));
 }
 .detail .info { display: grid; gap: 20px; }
-.detail h1 { font-size: 28px; font-weight: 700; letter-spacing: .04em; line-height: 1.1; }
-.detail dl { display: grid; grid-template-columns: 72px 1fr; gap: 8px 12px; }
-.detail dt { color: var(--muted); }
-.detail .add {
-  display: block; text-align: center; text-decoration: none;
-  width: 100%; padding: 14px; border: 1px solid var(--ink); background: var(--ink); color: #fff;
-  font: inherit; letter-spacing: .1em; cursor: pointer;
-}
-.detail .add:hover { background: #fff; color: var(--ink); }
-.detail button:focus-visible, .detail a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.detail .outfit { padding: 0 28px 28px; }
-.detail .outfit h2 { font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: .12em; margin-bottom: 12px; }
-.detail .outfit ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-.detail .outfit button {
-  display: grid; gap: 6px; width: 100%; background: none; border: 0; padding: 0;
-  font: inherit; font-size: 11px; color: inherit; cursor: pointer; text-align: left;
-}
-.detail .outfit img { width: 100%; aspect-ratio: 1; object-fit: contain; }
-.detail .outfit button[aria-current="true"] span { text-decoration: underline; text-underline-offset: 3px; }
+.detail h1 { font-size: 42px; font-weight: 700; letter-spacing: .04em; line-height: 1.1; }
+.detail button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.detail .head { padding-bottom: 20px; border-bottom: 1px solid var(--ink); }
+.detail .outfit { margin-top: 8px; }
+.detail .outfit h2 { font-size: 20px; font-weight: 400; color: var(--ink); letter-spacing: .12em; margin-bottom: 12px; }
 @media (max-width: 720px) {
   .detail .body { grid-template-columns: 1fr; gap: 18px; padding: 8px 18px 18px; }
+  .detail .photo { min-height: 44vh; }
   .detail .photo img { max-height: 44vh; }
-  .detail .outfit { padding: 0 18px 18px; }
-  .detail .outfit ul { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* 소리 켜기 (홈·GAME 공용) */
@@ -104,9 +90,67 @@ dialog.about {
 dialog.about::backdrop { background: rgba(255, 255, 255, .7); }
 .about .close {
   display: block; margin-left: auto; background: none; border: 0; padding: 16px 20px 0;
-  font: inherit; font-size: 11px; letter-spacing: .12em; cursor: pointer;
+  font: inherit; font-size: 19px; letter-spacing: .12em; cursor: pointer;
 }
 .about .close:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.about p { padding: 12px 28px 32px; line-height: 1.8; word-break: keep-all; }
-.about p.credit { padding-top: 0; margin-top: -20px; font-size: 11px; }
+.about p { padding: 12px 28px 32px; font-size: 18px; line-height: 1.8; word-break: keep-all; }
+.about p.credit { padding-top: 0; margin-top: -20px; font-size: 16px; }
 .about p.credit a { color: var(--muted); }
+
+/* 룩북 바닥 (GAME·상세 창 공용) */
+.stage { position: relative; aspect-ratio: 3 / 4; container-type: size; }
+.slot {
+  position: absolute;
+  /* 드래그로 옮긴 만큼(--dx, --dy: 바닥 대비 %) 이동, --s 만큼 확대 */
+  transform: translateX(-50%) translate(calc(var(--dx, 0) * 1cqw), calc(var(--dy, 0) * 1cqh)) scale(var(--s, 1));
+  touch-action: none;
+  display: grid; place-items: center;
+  background: none; border: 0; padding: 0; cursor: grab;
+}
+.slot.dragging { cursor: grabbing; }
+.slot img {
+  pointer-events: none; -webkit-user-drag: none; user-select: none;
+  position: absolute; inset: 0; /* 칸 안에 맞춤: grid 안의 height:100%는 칸 높이를 안 지킴 */
+  width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 3px 4px rgba(40, 30, 20, .18));
+}
+.slot[data-part="모자"]   { left: 50%; top: 1%;  width: 30%; height: 17%; }
+.slot[data-part="상의"]   { left: 46%; top: 17%; width: 58%; height: 36%; }
+.slot[data-part="하의"]   { left: 46%; top: 50%; width: 46%; height: 36%; }
+.slot[data-part="신발"]   { left: 46%; top: 86%; width: 34%; height: 13%; }
+.slot[data-part="아이템"] { left: 86%; top: 42%; width: 28%; height: 30%; }
+.slot:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* 창 안에서는 스크롤바가 생기지 않게 바닥 밖은 잘라냄 */
+.detail .stage { width: min(100%, calc((100dvh - 300px) * .75)); min-width: 240px; overflow: hidden; }
+
+/* 로고: 1초 간격으로 한 글자씩 깜빡(5초) → 4초 동안 전부 켜둠 → 반복. 합계 9초 */
+.logo span, .cover-title span { animation: logo-blink 9s steps(1) infinite; }
+.logo span:nth-child(2), .cover-title span:nth-child(2) { animation-delay: 1s; }
+.logo span:nth-child(3), .cover-title span:nth-child(3) { animation-delay: 2s; }
+.logo span:nth-child(4), .cover-title span:nth-child(4) { animation-delay: 3s; }
+.logo span:nth-child(5), .cover-title span:nth-child(5) { animation-delay: 4s; }
+@keyframes logo-blink { 0% { opacity: 0; } 6.67% { opacity: 1; } } /* 꺼짐 0.6초 = 9초의 6.67% */
+@media (prefers-reduced-motion: reduce) { .logo span, .cover-title span { animation: none; } }
+
+/* 부위별 색 (오늘의 옷 팔레트) */
+[data-part="모자"]   { --part: #FF6A00; }
+[data-part="상의"]   { --part: #FF2E93; }
+[data-part="하의"]   { --part: #2D5BFF; }
+[data-part="신발"]   { --part: #1FD655; }
+[data-part="아이템"] { --part: #9B3BFF; }
+.tags button[data-part], .tabs button[data-part] { color: var(--part); }
+.detail .head { border-bottom-color: var(--part); }
+.detail .head h1 { color: var(--part); }
+.logo span { color: var(--part); }
+
+/* 옷 실루엣 (앞면·GAME 배경 공용) */
+.silhouette {
+  position: absolute; transform: translate(-50%, -50%) rotate(var(--r));
+  background: var(--part);
+  -webkit-mask: var(--src) center / contain no-repeat;
+  mask: var(--src) center / contain no-repeat;
+}
+/* 옅게 깐 배경. 조작은 통과시킴 */
+.backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: .1; pointer-events: none; }
+.cover-title span { color: var(--part); }
+.about p a:not(.credit a) { color: inherit; text-decoration: none; border-bottom: 2px dotted currentColor; }

@@ -5,3 +5,12 @@
 tools
 samples-src
 *.py
+# 원본 사진은 공개 금지 (얼굴 포함) — 누끼 webp만 올림
+*.jpg
+*.jpeg
+*.JPG
+*.JPEG
+*.png
+*.PNG
+*.heic
+*.HEIC
