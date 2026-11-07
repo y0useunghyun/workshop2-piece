@@ -14,3 +14,5 @@ samples-src
 *.PNG
 *.heic
 *.HEIC
+# 얼굴·착용샷·스티커북용 보관 (사이트·저장소 제외)
+_keep/
