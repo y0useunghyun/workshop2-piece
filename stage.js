@@ -8,8 +8,27 @@ const Stage = (() => {
   const WHEEL_SPEED = 0.002;           // 휠·트랙패드 핀치 감도
   const WHEEL_SETTLE_MS = 200;         // 휠이 멈춘 뒤 onChange
   const NO_OFFSET = [0, 0, 1];         // [dx, dy, scale] dx·dy = 바닥 너비·높이 대비 %
+  // 부위별 기본 자리 [top, width, height] (바닥 대비 %). 사진 비율과 상관없이 이 칸과 같은 면적으로 맞춤
+  const BOX = { 모자: [1, 30, 17], 상의: [17, 58, 36], 하의: [50, 46, 36], 신발: [86, 34, 13], 아이템: [42, 28, 30] };
+  const MAX_GROW = 1.6;      // 칸보다 이 배수 넘게 길어지지 않게
+  const FILL_BASE = 0.6;     // 보통 사진의 옷 비율. 이보다 비어 있으면 그만큼 키움
+  const STAGE_H = 400 / 3;   // 바닥 높이 (cqw, 3:4)
   const clampScale = v => Math.min(SCALE_MAX, Math.max(SCALE_MIN, v));
   const defaultOffsets = () => Object.fromEntries(PARTS.map(part => [part, NO_OFFSET]));
+
+  // 옷 면적이 같게 + 칸 중심 유지, 바닥 밖으로는 안 나가게
+  function sizeSlot(slot, part, ar = 1, fill = FILL_BASE) {
+    const [top, w, h] = BOX[part];
+    const boxH = h * STAGE_H / 100;
+    const area = w * boxH * FILL_BASE / Math.min(1, Math.max(0.3, fill)); // 옷 면적이 같아지게
+    let bw = Math.sqrt(area * ar), bh = Math.sqrt(area / ar);
+    const k = Math.min(1, MAX_GROW * w / bw, MAX_GROW * boxH / bh);
+    bw *= k; bh *= k;
+    const cy = Math.min(Math.max((top + h / 2) * STAGE_H / 100, bh / 2), STAGE_H - bh / 2);
+    slot.style.width = `${bw}cqw`;
+    slot.style.height = `${bh}cqw`;
+    slot.style.top = `${cy - bh / 2}cqw`;
+  }
 
   function applyOffset(slot, [dx, dy, sc]) {
     slot.style.setProperty('--dx', dx);
@@ -115,6 +134,7 @@ const Stage = (() => {
           b.className = 'slot';
           b.dataset.part = part;
           applyOffset(b, offsets[part]);
+          sizeSlot(b, part, p.ar, p.fill);
           b.setAttribute('aria-label', p.person ? `${p.person}의 ${p.part}` : p.part);
           const img = document.createElement('img');
           img.src = p.src;
