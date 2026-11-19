@@ -139,12 +139,6 @@ dialog.about::backdrop { background: rgba(255, 255, 255, .7); }
 [data-person="승현"] { --who: #FF7F11; }
 [data-person="하린"] { --who: #FFD84D; }
 [data-person="하연"] { --who: #FF4F6D; }
-/* 비교용 E 팔레트 (라임×바이올렛): 주소에 ?p=e 붙이면 적용 → compare.html */
-:root[data-palette="e"] [data-person="물결"] { --who: #C8F32B; }
-:root[data-palette="e"] [data-person="서빈"] { --who: #6A2BFF; }
-:root[data-palette="e"] [data-person="승현"] { --who: #FF2E93; }
-:root[data-palette="e"] [data-person="하린"] { --who: #00D4C0; }
-:root[data-palette="e"] [data-person="하연"] { --who: #FF7A00; }
 .tags button[data-person] { color: var(--who); }
 .detail .head { border-bottom-color: var(--who, var(--ink)); }
 .detail .head h1 { color: var(--who, var(--ink)); }
