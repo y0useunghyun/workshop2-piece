@@ -16,6 +16,7 @@
       `<img src="${esc(piece.src)}" alt="${esc(piece.part)}" style="transform: rotate(${piece.rot}deg)">`;
     const head = dialog.querySelector('.head');
     head.dataset.part = piece.part;
+    if (piece.person) head.dataset.person = piece.person; else delete head.dataset.person;
     head.innerHTML = `<h1>${esc(title(piece))}</h1>`;
   }
 

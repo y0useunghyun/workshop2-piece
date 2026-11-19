@@ -19,7 +19,7 @@
 <body>
 <div class="backdrop" style="opacity:.15" aria-hidden="true"></div>
 <header>
-  <a class="logo" href="index.html" aria-label="PIECE"><span aria-hidden="true" data-part="모자">P</span><span aria-hidden="true" data-part="상의">I</span><span aria-hidden="true" data-part="하의">E</span><span aria-hidden="true" data-part="신발">C</span><span aria-hidden="true" data-part="아이템">E</span></a>
+  <a class="logo" href="index.html" aria-label="PIECE"><span aria-hidden="true" data-person="물결">P</span><span aria-hidden="true" data-person="서빈">I</span><span aria-hidden="true" data-person="승현">E</span><span aria-hidden="true" data-person="하린">C</span><span aria-hidden="true" data-person="하연">E</span></a>
   <div class="tags" role="toolbar" aria-label="태그"></div>
   <nav>
     <a href="game.html">GAME</a><a href="#" data-about>ABOUT</a>
@@ -56,7 +56,7 @@ function layout() {
 // 태그: 옷은 제자리, 안 맞는 옷만 꺼짐
 const PART_EN = { 모자: 'HAT', 상의: 'TOP', 하의: 'BOTTOM', 신발: 'SHOES', 아이템: 'ITEM' };
 const tagBar = document.querySelector('.tags');
-const people = [...new Set(PIECES.filter(p => p.person).map(p => p.person))];
+const people = [...new Set(PIECES.filter(p => p.person).map(p => p.person))].sort((a, b) => a.localeCompare(b, 'ko'));
 let filter = { part: null, person: null };
 
 function applyFilter() {
@@ -68,11 +68,11 @@ function applyFilter() {
   });
 }
 
-function tagButton(label, pressed, next, part) {
+function tagButton(label, pressed, next, person) {
   const b = document.createElement('button');
   b.type = 'button';
   b.textContent = label;
-  if (part) b.dataset.part = part;
+  if (person) b.dataset.person = person;
   b.setAttribute('aria-pressed', pressed);
   b.addEventListener('click', () => { filter = next; renderTags(); applyFilter(); });
   return b;
@@ -84,11 +84,11 @@ function renderTags() {
   parts.append(
     tagButton('ALL', !filter.part && !filter.person, { part: null, person: null }),
     ...PARTS.map(part => tagButton(PART_EN[part], filter.part === part,
-      { ...filter, part: filter.part === part ? null : part }, part)));
+      { ...filter, part: filter.part === part ? null : part })));
   const persons = document.createElement('div');
   persons.className = 'group';
   persons.append(...people.map(person => tagButton(person, filter.person === person,
-    { ...filter, person: filter.person === person ? null : person })));
+    { ...filter, person: filter.person === person ? null : person }, person)));
   tagBar.replaceChildren(parts, ...(people.length ? [persons] : []));
 }
 

@@ -28,10 +28,9 @@
   .paper { padding: 1.45em 1.35em 1.65em; background: #fff; color: var(--ink); font-size: calc(min(88vw, 440px, 56dvh) * .053); line-height: 1.45; }
   .cover-title { margin: 0; font-size: 4em; font-weight: 700; line-height: .9; letter-spacing: .04em; text-align: center; height: .68em; overflow: hidden; }
   .brand { margin: .5em 0 0; text-align: center; letter-spacing: .32em; font-size: 1.11em; }
-  .names { margin: .35em 0 0; text-align: center; }
   .dates { margin: .35em 0 .7em; text-align: center; font-size: .89em; color: var(--muted); }
   .rule { border: 0; border-top: 2px dotted var(--ink); margin: .55em 0; }
-  .row { display: flex; justify-content: space-between; color: var(--part); font-weight: 700; font-size: 1.11em; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; color: var(--who); font-weight: 700; font-size: 1.11em; }
   .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.22em; }
   .meta { margin: 0; font-size: 1em; }
   .meta a { color: inherit; text-decoration: none; border-bottom: 2px dotted currentColor; }
@@ -47,12 +46,11 @@
   <div class="cover-floor">
     <article class="receipt" aria-label="PIECE WORKSHOP 영수증">
       <div class="paper">
-        <h1 class="cover-title" aria-label="PIECE"><span aria-hidden="true" data-part="모자">P</span><span aria-hidden="true" data-part="상의">I</span><span aria-hidden="true" data-part="하의">E</span><span aria-hidden="true" data-part="신발">C</span><span aria-hidden="true" data-part="아이템">E</span></h1>
+        <h1 class="cover-title" aria-label="PIECE"><span aria-hidden="true" data-person="물결">P</span><span aria-hidden="true" data-person="서빈">I</span><span aria-hidden="true" data-person="승현">E</span><span aria-hidden="true" data-person="하린">C</span><span aria-hidden="true" data-person="하연">E</span></h1>
         <p class="brand">WORKSHOP</p>
-        <p class="names">승현 서빈 물결 하린 하연</p>
         <p class="dates">2026.11.05 — 2026.12.04</p>
         <hr class="rule">
-        <div class="row" data-part="모자"><span>HAT</span><span>30</span></div><div class="row" data-part="상의"><span>TOP</span><span>30</span></div><div class="row" data-part="하의"><span>BOTTOM</span><span>30</span></div><div class="row" data-part="신발"><span>SHOES</span><span>30</span></div><div class="row" data-part="아이템"><span>ITEM</span><span>30</span></div>
+        <div class="row" data-person="물결"><span>물결</span><span>30</span></div><div class="row" data-person="서빈"><span>서빈</span><span>30</span></div><div class="row" data-person="승현"><span>승현</span><span>30</span></div><div class="row" data-person="하린"><span>하린</span><span>30</span></div><div class="row" data-person="하연"><span>하연</span><span>30</span></div>
         <hr class="rule">
         <div class="total"><span>TOTAL</span><span>150 PIECES</span></div>
         <hr class="rule">

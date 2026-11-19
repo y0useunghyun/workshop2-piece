@@ -15,10 +15,10 @@ const Floor = (() => {
 
   // build(piece) → 요소. 위치·크기·기울기를 붙여서 바닥을 채움
   // scale: 옷 크기 배율, bleed: true면 여백 없이 화면 밖까지 걸치게 깔기
-  function scatter(floor, build, { scale = 1, bleed = false } = {}) {
+  function scatter(floor, build, { scale = 1, bleed = false, source = PIECES } = {}) {
     // ponytail: 150개가 모이기 전까진 있는 옷을 반복해서 채움. ?n= 으로 개수 확인 가능
     const count = Number(new URLSearchParams(location.search).get('n')) || TOTAL;
-    const pool = Array.from({ length: count }, (_, i) => PIECES[i % PIECES.length]);
+    const pool = Array.from({ length: count }, (_, i) => source[i % source.length]);
     const W = floor.clientWidth, H = floor.clientHeight;
     const cols = Math.max(3, Math.round(Math.sqrt(pool.length * W / H)));
     const rows = Math.ceil(pool.length / cols);
@@ -30,6 +30,7 @@ const Floor = (() => {
       const size = cell * (PART_SCALE[p.part] ?? 1) * (0.85 + Math.random() * 0.3) * scale;
       const el = build(p);
       el.dataset.part = p.part;
+      if (p.person) el.dataset.person = p.person;
       const x = pad + (c + 0.5 + (Math.random() - 0.5) * 0.6) * cellW;
       const y = pad + (r + 0.5 + (Math.random() - 0.5) * 0.6) * cellH;
       // bleed가 아니면 옷이 영역 밖으로 잘리지 않게 안쪽으로 밀어 넣음
@@ -50,7 +51,7 @@ const Floor = (() => {
     s.style.setProperty('--src', `url("${p.src}")`);
     s.dataset.src = p.src;
     return s;
-  }, options);
+  }, { source: PIECES.filter(p => p.person), ...options }); // 실루엣은 팀원 옷만 (샘플 제외)
 
   // 옅은 실루엣 배경: <div class="backdrop">을 채우고 창 너비가 바뀌면 다시 깜
   function backdrop(el) {

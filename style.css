@@ -133,25 +133,25 @@ dialog.about::backdrop { background: rgba(255, 255, 255, .7); }
 @keyframes logo-blink { 0% { opacity: 0; } 6.67% { opacity: 1; } } /* 꺼짐 0.6초 = 9초의 6.67% */
 @media (prefers-reduced-motion: reduce) { .logo span, .cover-title span { animation: none; } }
 
-/* 부위별 색 (오늘의 옷 팔레트) */
-[data-part="모자"]   { --part: #FF6A00; }
-[data-part="상의"]   { --part: #FF2E93; }
-[data-part="하의"]   { --part: #2D5BFF; }
-[data-part="신발"]   { --part: #1FD655; }
-[data-part="아이템"] { --part: #9B3BFF; }
-.tags button[data-part], .tabs button[data-part] { color: var(--part); }
-.detail .head { border-bottom-color: var(--part); }
-.detail .head h1 { color: var(--part); }
-.logo span { color: var(--part); }
+/* 사람별 색 (2026-11-19부터 부위 대신 사람에게 배정, 이름순 밤색→핑크) */
+[data-person="물결"] { --who: #8A4B2A; }
+[data-person="서빈"] { --who: #6EC8FF; }
+[data-person="승현"] { --who: #FF7F11; }
+[data-person="하린"] { --who: #FFD84D; }
+[data-person="하연"] { --who: #FF4F6D; }
+.tags button[data-person] { color: var(--who); }
+.detail .head { border-bottom-color: var(--who, var(--ink)); }
+.detail .head h1 { color: var(--who, var(--ink)); }
+.logo span { color: var(--who); }
 
 /* 옷 실루엣 (앞면·GAME 배경 공용) */
 .silhouette {
   position: absolute; transform: translate(-50%, -50%) rotate(var(--r));
-  background: var(--part);
+  background: var(--who, var(--muted)); /* 사람 없는 샘플은 회색 */
   -webkit-mask: var(--src) center / contain no-repeat;
   mask: var(--src) center / contain no-repeat;
 }
 /* 옅게 깐 배경. 조작은 통과시킴 */
 .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: .1; pointer-events: none; }
-.cover-title span { color: var(--part); }
+.cover-title span { color: var(--who); }
 .about p a:not(.credit a) { color: inherit; text-decoration: none; border-bottom: 2px dotted currentColor; }
