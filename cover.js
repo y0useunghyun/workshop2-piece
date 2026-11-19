@@ -102,7 +102,8 @@
   addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; layout(); } });
   receipt.style.zIndex = topZ;
   layout();
-  document.fonts?.ready.then(tearPaper); // 글꼴이 늦게 오면 종이 높이가 바뀌어서 다시 자름
+  // 종이 크기가 바뀔 때마다 다시 자름: 글꼴이 늦게 오거나, 창 높이(dvh)만 바뀌어 영수증 너비가 달라질 때
+  new ResizeObserver(tearPaper).observe(paper);
 
   // 음악: 부위마다 옷 하나를 뽑아 악기로 (브라우저 정책상 버튼을 눌러야 소리가 남)
   const PARTS = ['모자', '상의', '하의', '신발', '아이템'];
