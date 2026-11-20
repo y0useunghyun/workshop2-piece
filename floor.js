@@ -2,7 +2,6 @@
 const Floor = (() => {
   const PART_SCALE = { 모자: 1.1, 상의: 1.7, 하의: 1.6, 신발: 1.15, 아이템: 1.3 }; // 칸 대비 기본 크기
   const MAX_TILT = 14;  // 회전 ±도
-  const TOTAL = 150;    // 발표 기준 총 개수 (5명 × 30일)
 
   function shuffle(arr) {
     const a = [...arr];
@@ -16,8 +15,8 @@ const Floor = (() => {
   // build(piece) → 요소. 위치·크기·기울기를 붙여서 바닥을 채움
   // scale: 옷 크기 배율, bleed: true면 여백 없이 화면 밖까지 걸치게 깔기
   function scatter(floor, build, { scale = 1, bleed = false, source = PIECES } = {}) {
-    // ponytail: 150개가 모이기 전까진 있는 옷을 반복해서 채움. ?n= 으로 개수 확인 가능
-    const count = Number(new URLSearchParams(location.search).get('n')) || TOTAL;
+    // 있는 옷을 한 번씩만 깜 (같은 사진 반복 X). 옷이 적으면 칸이 커짐. ?n=150 으로 다 모였을 때 크기 미리보기
+    const count = Number(new URLSearchParams(location.search).get('n')) || source.length;
     const pool = Array.from({ length: count }, (_, i) => source[i % source.length]);
     const W = floor.clientWidth, H = floor.clientHeight;
     const cols = Math.max(3, Math.round(Math.sqrt(pool.length * W / H)));
