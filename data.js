@@ -507,6 +507,71 @@ const PIECES = [
   "fill": 0.753
  },
  {
+  "id": "11-18/hat_harin",
+  "src": "pieces/11-18/hat_harin.webp",
+  "part": "모자",
+  "day": "11-18",
+  "person": "하린",
+  "tone": {
+   "L": 23
+  },
+  "rot": 0,
+  "ar": 0.959,
+  "fill": 0.563
+ },
+ {
+  "id": "11-18/top_hayeon",
+  "src": "pieces/11-18/top_hayeon.webp",
+  "part": "상의",
+  "day": "11-18",
+  "person": "하연",
+  "tone": {
+   "L": 53
+  },
+  "rot": 0,
+  "ar": 0.7,
+  "fill": 0.595
+ },
+ {
+  "id": "11-18/shoes_seunghyun",
+  "src": "pieces/11-18/shoes_seunghyun.webp",
+  "part": "신발",
+  "day": "11-18",
+  "person": "승현",
+  "tone": {
+   "L": 47
+  },
+  "rot": 0,
+  "ar": 1.28,
+  "fill": 0.669
+ },
+ {
+  "id": "11-18/item_mulgyeol",
+  "src": "pieces/11-18/item_mulgyeol.webp",
+  "part": "아이템",
+  "day": "11-18",
+  "person": "물결",
+  "tone": {
+   "L": 31
+  },
+  "rot": 0,
+  "ar": 0.345,
+  "fill": 0.71
+ },
+ {
+  "id": "11-18/bottom_seobin",
+  "src": "pieces/11-18/bottom_seobin.webp",
+  "part": "하의",
+  "day": "11-18",
+  "person": "서빈",
+  "tone": {
+   "L": 24
+  },
+  "rot": 0,
+  "ar": 1.178,
+  "fill": 0.774
+ },
+ {
   "id": "11-19/bottom_hayeon",
   "src": "pieces/11-19/bottom_hayeon.webp",
   "part": "하의",
