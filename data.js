@@ -507,6 +507,240 @@ const PIECES = [
   "fill": 0.753
  },
  {
+  "id": "11-19/bottom_hayeon",
+  "src": "pieces/11-19/bottom_hayeon.webp",
+  "part": "하의",
+  "day": "11-19",
+  "person": "하연",
+  "tone": {
+   "L": 56
+  },
+  "rot": 0,
+  "ar": 0.818,
+  "fill": 0.576
+ },
+ {
+  "id": "11-19/hat_seobin",
+  "src": "pieces/11-19/hat_seobin.webp",
+  "part": "모자",
+  "day": "11-19",
+  "person": "서빈",
+  "tone": {
+   "L": 20
+  },
+  "rot": 0,
+  "ar": 1.24,
+  "fill": 0.626
+ },
+ {
+  "id": "11-19/item_seunghyun",
+  "src": "pieces/11-19/item_seunghyun.webp",
+  "part": "아이템",
+  "day": "11-19",
+  "person": "승현",
+  "tone": {
+   "L": 19
+  },
+  "rot": 0,
+  "ar": 1.452,
+  "fill": 0.596
+ },
+ {
+  "id": "11-19/shoes_mulgyeol",
+  "src": "pieces/11-19/shoes_mulgyeol.webp",
+  "part": "신발",
+  "day": "11-19",
+  "person": "물결",
+  "tone": {
+   "L": 72
+  },
+  "rot": 0,
+  "ar": 0.722,
+  "fill": 0.777
+ },
+ {
+  "id": "11-19/top_harin",
+  "src": "pieces/11-19/top_harin.webp",
+  "part": "상의",
+  "day": "11-19",
+  "person": "하린",
+  "tone": {
+   "L": 36
+  },
+  "rot": 0,
+  "ar": 0.653,
+  "fill": 0.732
+ },
+ {
+  "id": "11-20/bottom_mulgyeol",
+  "src": "pieces/11-20/bottom_mulgyeol.webp",
+  "part": "하의",
+  "day": "11-20",
+  "person": "물결",
+  "tone": {
+   "L": 33
+  },
+  "rot": 90,
+  "ar": 0.721,
+  "fill": 0.665
+ },
+ {
+  "id": "11-20/hat_seunghyun",
+  "src": "pieces/11-20/hat_seunghyun.webp",
+  "part": "모자",
+  "day": "11-20",
+  "person": "승현",
+  "tone": {
+   "L": 71
+  },
+  "rot": 0,
+  "ar": 0.595,
+  "fill": 0.739
+ },
+ {
+  "id": "11-20/item_hayeon",
+  "src": "pieces/11-20/item_hayeon.webp",
+  "part": "아이템",
+  "day": "11-20",
+  "person": "하연",
+  "tone": {
+   "L": 54
+  },
+  "rot": 0,
+  "ar": 1.219,
+  "fill": 0.47
+ },
+ {
+  "id": "11-20/shoes_seobin",
+  "src": "pieces/11-20/shoes_seobin.webp",
+  "part": "신발",
+  "day": "11-20",
+  "person": "서빈",
+  "tone": {
+   "L": 24
+  },
+  "rot": 0,
+  "ar": 0.976,
+  "fill": 0.686
+ },
+ {
+  "id": "11-20/top_harin",
+  "src": "pieces/11-20/top_harin.webp",
+  "part": "상의",
+  "day": "11-20",
+  "person": "하린",
+  "tone": {
+   "L": 28
+  },
+  "rot": 0,
+  "ar": 0.664,
+  "fill": 0.787
+ },
+ {
+  "id": "11-21/bottom_hayeon",
+  "src": "pieces/11-21/bottom_hayeon.webp",
+  "part": "하의",
+  "day": "11-21",
+  "person": "하연",
+  "tone": {
+   "L": 13
+  },
+  "rot": 90,
+  "ar": 0.635,
+  "fill": 0.832
+ },
+ {
+  "id": "11-21/hat_mulgyeol",
+  "src": "pieces/11-21/hat_mulgyeol.webp",
+  "part": "모자",
+  "day": "11-21",
+  "person": "물결",
+  "tone": {
+   "L": 47
+  },
+  "rot": 0,
+  "ar": 1.103,
+  "fill": 0.798
+ },
+ {
+  "id": "11-21/item_seobin",
+  "src": "pieces/11-21/item_seobin.webp",
+  "part": "아이템",
+  "day": "11-21",
+  "person": "서빈",
+  "tone": {
+   "L": 52
+  },
+  "rot": 0,
+  "ar": 0.326,
+  "fill": 0.759
+ },
+ {
+  "id": "11-21/shoes_seunghyun",
+  "src": "pieces/11-21/shoes_seunghyun.webp",
+  "part": "신발",
+  "day": "11-21",
+  "person": "승현",
+  "tone": {
+   "L": 27
+  },
+  "rot": 0,
+  "ar": 1.473,
+  "fill": 0.637
+ },
+ {
+  "id": "11-22/bottom_hayeon",
+  "src": "pieces/11-22/bottom_hayeon.webp",
+  "part": "하의",
+  "day": "11-22",
+  "person": "하연",
+  "tone": {
+   "L": 32
+  },
+  "rot": 0,
+  "ar": 0.586,
+  "fill": 0.821
+ },
+ {
+  "id": "11-22/hat_seunghyun",
+  "src": "pieces/11-22/hat_seunghyun.webp",
+  "part": "모자",
+  "day": "11-22",
+  "person": "승현",
+  "tone": {
+   "L": 56
+  },
+  "rot": 0,
+  "ar": 0.818,
+  "fill": 0.725
+ },
+ {
+  "id": "11-22/item_seobin",
+  "src": "pieces/11-22/item_seobin.webp",
+  "part": "아이템",
+  "day": "11-22",
+  "person": "서빈",
+  "tone": {
+   "L": 24
+  },
+  "rot": 0,
+  "ar": 0.607,
+  "fill": 0.727
+ },
+ {
+  "id": "11-22/shoes_mulgyeol",
+  "src": "pieces/11-22/shoes_mulgyeol.webp",
+  "part": "신발",
+  "day": "11-22",
+  "person": "물결",
+  "tone": {
+   "L": 32
+  },
+  "rot": 180,
+  "ar": 1.033,
+  "fill": 0.708
+ },
+ {
   "id": "11-5/bottom_seobin",
   "src": "pieces/11-5/bottom_seobin.webp",
   "part": "하의",
